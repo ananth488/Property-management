@@ -28,13 +28,12 @@ export default function BlogSidebar({ posts, activeId, onSelect }: BlogSidebarPr
             <button
               key={post.id}
               onClick={() => onSelect(post.id)}
-              className={`w-full text-left bg-white border rounded-xl p-4 shadow-sm hover:shadow-md hover:border-slate-300 transition-all flex gap-4 items-center focus:outline-none cursor-pointer group ${
-                isActive
+              className={`w-full text-left bg-white border rounded-xl p-4 shadow-sm hover:shadow-md hover:border-slate-300 transition-all flex gap-4 items-center focus:outline-none cursor-pointer group ${isActive
                   ? "border-[#d96126] ring-1 ring-[#d96126]"
                   : "border-slate-100"
-              }`}
+                }`}
             >
-              {/* Thumbnail Image */}
+              {/* Thumbnail image */}
               <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-slate-100">
                 <Image
                   src={post.image}
