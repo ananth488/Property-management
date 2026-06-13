@@ -1,7 +1,9 @@
+import ScrollReveal from "../ScrollReveal";
+
 export default function ServiceCTA() {
   return (
     <section className="w-full bg-[#f8fafc] py-24 px-6 text-center">
-      <div className="max-w-3xl mx-auto space-y-8">
+      <ScrollReveal animation="fade-up" className="max-w-3xl mx-auto space-y-8">
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 leading-tight">
           Experience the Difference of <br className="hidden sm:inline" />
           Elite Management
@@ -19,7 +21,7 @@ export default function ServiceCTA() {
             View Service Guide
           </button>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

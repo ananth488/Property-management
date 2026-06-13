@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ScrollReveal from "../ScrollReveal";
 
 export default function ServiceCards() {
   return (
@@ -10,7 +11,10 @@ export default function ServiceCards() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           
           {/* Card 1: Residential Management (Col span 8) */}
-          <div className="md:col-span-8 bg-[#f8fafc] border border-slate-100 rounded-2xl overflow-hidden grid grid-cols-1 sm:grid-cols-12 shadow-sm min-h-[420px]">
+          <ScrollReveal
+            animation="fade-left"
+            className="md:col-span-8 bg-[#f8fafc] border border-slate-100 rounded-2xl overflow-hidden grid grid-cols-1 sm:grid-cols-12 shadow-sm min-h-[420px]"
+          >
             {/* Left side text */}
             <div className="p-8 sm:p-10 sm:col-span-7 flex flex-col justify-center">
               <h3 className="text-2xl font-serif font-bold text-slate-900 mb-4 tracking-tight">
@@ -41,10 +45,13 @@ export default function ServiceCards() {
                 className="object-cover"
               />
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Card 2: Commercial Leasing (Col span 4) */}
-          <div className="md:col-span-4 bg-[#121826] text-white rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm min-h-[420px]">
+          <ScrollReveal
+            animation="fade-right"
+            className="md:col-span-4 bg-[#121826] text-white rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm min-h-[420px]"
+          >
             {/* Text content */}
             <div className="p-8">
               <h3 className="text-2xl font-serif font-bold text-white mb-4 tracking-tight">
@@ -71,12 +78,15 @@ export default function ServiceCards() {
                 className="object-cover opacity-80"
               />
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
 
         {/* Row 2: Strategic Investment Consulting (Col span 12) */}
-        <div className="bg-[#f8fafc] border border-slate-100 rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12 shadow-sm min-h-[320px]">
+        <ScrollReveal
+          animation="fade-up"
+          className="bg-[#f8fafc] border border-slate-100 rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12 shadow-sm min-h-[320px]"
+        >
           {/* Left side image */}
           <div className="relative h-64 md:h-auto md:col-span-5 bg-slate-100">
             <Image
@@ -101,7 +111,7 @@ export default function ServiceCards() {
               We go beyond management. Our consultants provide deep market analysis, risk assessment, and portfolio diversification strategies to ensure your real estate investments outperform the market. Whether you are acquiring your first property or scaling a global portfolio, we provide the clarity required for complex decisions.
             </p>
           </div>
-        </div>
+        </ScrollReveal>
 
       </div>
     </section>

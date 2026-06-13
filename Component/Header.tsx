@@ -1,12 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const pathname = usePathname();
+
+  useEffect(() => {
+    const activeTheme = document.documentElement.classList.contains("dark") ? "dark" : "light";
+    setTheme(activeTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    if (theme === "light") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setTheme("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setTheme("light");
+    }
+  };
 
   // Helper function to check if active
   const isActive = (path: string) => pathname === path;
@@ -17,7 +36,7 @@ export default function Header() {
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/" className="text-2xl font-serif font-bold text-slate-900 tracking-tight">
-            The Best Star
+            <Image src="/Logo.png" alt="logo" width={100} height={100} className="dark:invert transition-all duration-200" />
           </Link>
         </div>
 
@@ -75,9 +94,24 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Action Button */}
-        <div className="hidden md:block">
-          <button className="bg-[#121826] text-white hover:bg-slate-800 px-6 py-2.5 rounded text-sm font-medium tracking-wide transition-all duration-200">
+        {/* Theme Toggle & Action Button */}
+        <div className="hidden md:flex items-center gap-4">
+          <button
+            onClick={toggleTheme}
+            className="w-10 h-10 rounded-full border border-slate-200 hover:border-slate-400 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors focus:outline-none cursor-pointer"
+            aria-label="Toggle Theme"
+          >
+            {theme === "dark" ? (
+              <svg className="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            )}
+          </button>
+          <button className={`${theme === "dark" ? "bg-[#ffffff] text-[#0f172a] hover:bg-slate-100" : "bg-black text-white hover:bg-slate-800"} px-6 py-2.5 rounded text-sm font-semibold tracking-wide transition-all duration-200 cursor-pointer`}>
             Get Started
           </button>
         </div>
@@ -171,10 +205,31 @@ export default function Header() {
             >
               Contact
             </Link>
+            <div className="flex items-center justify-between py-2 border-t border-b border-slate-100">
+              <span className="text-sm font-semibold text-slate-600">Theme</span>
+              <button
+                onClick={toggleTheme}
+                className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 focus:outline-none"
+                aria-label="Toggle Theme"
+              >
+                {theme === "dark" ? (
+                  <svg className="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                )}
+              </button>
+            </div>
             <div className="pt-2">
               <button
                 onClick={() => setIsOpen(false)}
-                className="w-full bg-[#121826] text-white hover:bg-slate-800 py-3 rounded text-sm font-medium tracking-wide transition-all duration-200"
+                className={`w-full py-3 rounded text-sm font-semibold tracking-wide transition-all duration-200 cursor-pointer ${theme === "dark"
+                  ? "bg-[#ffffff] text-[#0f172a] hover:bg-slate-100"
+                  : "bg-[#121826] text-white hover:bg-slate-800"
+                  }`}
               >
                 Get Started
               </button>

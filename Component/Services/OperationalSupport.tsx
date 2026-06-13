@@ -1,3 +1,5 @@
+import ScrollReveal from "../ScrollReveal";
+
 export default function OperationalSupport() {
   const operations = [
     {
@@ -95,37 +97,43 @@ export default function OperationalSupport() {
     <section className="w-full bg-[#f8fafc] py-20 px-6 border-t border-slate-100">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
+        <ScrollReveal animation="fade-up" className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4">
             Precision Operational Support
           </h2>
           <p className="text-slate-500 text-sm md:text-base leading-relaxed max-w-xl mx-auto font-normal">
             Four operational services that ensure your properties run with absolute transparency and zero friction.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* 2x2 Operations Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {operations.map((op, index) => (
-            <div
+            <ScrollReveal
               key={index}
-              className="bg-white border border-slate-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 flex items-start gap-5"
+              animation="fade-up"
+              delay={index * 150}
+              className="flex animate-reveal"
             >
-              {/* Icon Holder */}
-              <div className="flex-shrink-0 w-10 h-10 rounded bg-slate-50 border border-slate-100 flex items-center justify-center">
-                {op.icon}
+              <div
+                className="bg-white border border-slate-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 flex items-start gap-5 w-full"
+              >
+                {/* Icon Holder */}
+                <div className="flex-shrink-0 w-10 h-10 rounded bg-slate-50 border border-slate-100 flex items-center justify-center">
+                  {op.icon}
+                </div>
+                
+                {/* Content */}
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">
+                    {op.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm md:text-base leading-relaxed font-normal">
+                    {op.description}
+                  </p>
+                </div>
               </div>
-              
-              {/* Content */}
-              <div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  {op.title}
-                </h3>
-                <p className="text-slate-600 text-sm md:text-base leading-relaxed font-normal">
-                  {op.description}
-                </p>
-              </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

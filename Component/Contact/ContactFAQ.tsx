@@ -1,9 +1,10 @@
 import Link from "next/link";
+import ScrollReveal from "../ScrollReveal";
 
 export default function ContactFAQ() {
   return (
     <section className="w-full bg-[#f8fafc] py-20 px-6 text-center border-t border-slate-100">
-      <div className="max-w-2xl mx-auto space-y-6">
+      <ScrollReveal animation="fade-up" className="max-w-2xl mx-auto space-y-6">
         <h2 className="text-3xl font-serif font-bold text-slate-900 leading-tight">
           Have Quick Questions?
         </h2>
@@ -18,7 +19,7 @@ export default function ContactFAQ() {
             View FAQ
           </Link>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

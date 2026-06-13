@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ScrollReveal from "../ScrollReveal";
 
 export default function GoldStandard() {
   const standards = [
@@ -23,7 +24,10 @@ export default function GoldStandard() {
     <section className="w-full bg-[#121826] text-white py-20 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Left: Content */}
-        <div className="lg:col-span-6 space-y-10">
+        <ScrollReveal
+          animation="fade-left"
+          className="lg:col-span-6 space-y-10"
+        >
           <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tight text-white leading-tight">
             Setting the Gold Standard in Property Care
           </h2>
@@ -40,10 +44,13 @@ export default function GoldStandard() {
               </div>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Right: Mockup/Image */}
-        <div className="lg:col-span-6 flex justify-center">
+        <ScrollReveal
+          animation="fade-right"
+          className="lg:col-span-6 flex justify-center w-full"
+        >
           <div className="relative w-full max-w-[500px] aspect-[4/3] sm:aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-950">
             <Image
               src="/services-gold-standard.png"
@@ -53,7 +60,7 @@ export default function GoldStandard() {
               className="object-cover opacity-90"
             />
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ScrollReveal from "../ScrollReveal";
 
 export default function FeaturedCollections() {
   return (
@@ -7,7 +8,7 @@ export default function FeaturedCollections() {
       <div className="max-w-7xl mx-auto space-y-6">
         
         {/* Section Header with Carousel Arrows */}
-        <div className="flex items-end justify-between">
+        <ScrollReveal animation="fade-up" className="flex items-end justify-between">
           <div>
             <span className="text-xs font-semibold text-[#d96126] uppercase tracking-widest block mb-2">
               Selected For You
@@ -29,13 +30,16 @@ export default function FeaturedCollections() {
               </svg>
             </button>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Featured Block: Flex/Grid Split */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Left Large Glass Pavilion Card (Col span 8) */}
-          <div className="lg:col-span-8 relative rounded-2xl overflow-hidden shadow-md min-h-[460px] flex flex-col justify-between p-8 group">
+          <ScrollReveal
+            animation="fade-left"
+            className="lg:col-span-8 relative rounded-2xl overflow-hidden shadow-md min-h-[460px] flex flex-col justify-between p-8 group"
+          >
             {/* Background Image */}
             <div className="absolute inset-0 bg-slate-900 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: "url('/properties-glass-pavilion.png')" }} />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/40" />
@@ -87,10 +91,13 @@ export default function FeaturedCollections() {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Right Luxury Portfolio Info Card (Col span 4) */}
-          <div className="lg:col-span-4 bg-[#121826] text-white rounded-2xl p-8 flex flex-col justify-between shadow-md">
+          <ScrollReveal
+            animation="fade-right"
+            className="lg:col-span-4 bg-[#121826] text-white rounded-2xl p-8 flex flex-col justify-between shadow-md"
+          >
             <div className="space-y-6">
               <h3 className="text-2xl font-serif font-bold text-white tracking-tight">
                 Luxury Portfolio
@@ -134,7 +141,7 @@ export default function FeaturedCollections() {
                 View All Premium Properties
               </Link>
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
 

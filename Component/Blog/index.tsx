@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ActiveBlogShowcase from "./ActiveBlogShowcase";
 import BlogSidebar from "./BlogSidebar";
+import ScrollReveal from "../ScrollReveal";
 
 export default function Blog() {
   const blogPosts = [
@@ -79,6 +80,11 @@ export default function Blog() {
   ];
 
   const [activePostId, setActivePostId] = useState(1);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const activePost = blogPosts.find((post) => post.id === activePostId) || blogPosts[0];
 
@@ -86,11 +92,19 @@ export default function Blog() {
     <section className="w-full bg-[#f8fafc] py-16 px-6">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Title Block */}
-        <div>
-          <span className="text-xs font-semibold text-[#d96126] uppercase tracking-widest block mb-2">
+        <div className="overflow-hidden">
+          <span
+            className={`text-xs font-semibold text-[#d96126] uppercase tracking-widest block mb-2 transition-all duration-1000 ease-out ${
+              isMounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
+            }`}
+          >
             Stay Informed
           </span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+          <h2
+            className={`text-3xl md:text-4xl font-serif font-bold text-slate-900 transition-all duration-1000 delay-200 ease-out ${
+              isMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
             Market Insights & Articles
           </h2>
         </div>
@@ -99,12 +113,19 @@ export default function Blog() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Main Active Blog Reader (Col span 8) */}
-          <div className="lg:col-span-8">
+          <ScrollReveal
+            animation="fade-left"
+            className="lg:col-span-8"
+          >
             <ActiveBlogShowcase post={activePost} />
-          </div>
+          </ScrollReveal>
 
           {/* Recent Articles list (Col span 4) */}
-          <div className="lg:col-span-4">
+          <ScrollReveal
+            animation="fade-right"
+            delay={200}
+            className="lg:col-span-4"
+          >
             <BlogSidebar
               posts={blogPosts}
               activeId={activePostId}
@@ -114,7 +135,7 @@ export default function Blog() {
                 window.scrollTo({ top: 180, behavior: "smooth" });
               }}
             />
-          </div>
+          </ScrollReveal>
 
         </div>
       </div>

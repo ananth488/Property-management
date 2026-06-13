@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ScrollReveal from "../ScrollReveal";
 
 export default function Expertise() {
   const expertises = [
@@ -74,56 +75,62 @@ export default function Expertise() {
     <section className="w-full bg-[#f8fafc] py-20 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <ScrollReveal animation="fade-up" className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900">
             Our Core Expertise
           </h2>
           <div className="w-16 h-[3px] bg-[#d96126] mx-auto mt-4 rounded-full" />
-        </div>
+        </ScrollReveal>
 
         {/* Expertise Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {expertises.map((item, index) => (
-            <div
+            <ScrollReveal
               key={index}
-              className="bg-white border border-slate-100 p-8 rounded-lg shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group"
+              animation="fade-up"
+              delay={index * 150}
+              className="flex"
             >
-              {/* Icon Container */}
-              <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center mb-6 transition-colors group-hover:bg-blue-100">
-                {item.icon}
-              </div>
-
-              {/* Title */}
-              <h3 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">
-                {item.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-slate-600 leading-relaxed text-sm md:text-base mb-6 flex-grow font-normal">
-                {item.description}
-              </p>
-
-              {/* Learn More Link */}
-              <Link
-                href="#"
-                className="inline-flex items-center text-[#d96126] font-semibold text-sm group-hover:text-[#c2501c] transition-colors"
+              <div
+                className="bg-white border border-slate-100 p-8 rounded-lg shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group w-full"
               >
-                {item.link}
-                <svg
-                  className="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1.5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
+                {/* Icon Container */}
+                <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center mb-6 transition-colors group-hover:bg-blue-100">
+                  {item.icon}
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">
+                  {item.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-slate-600 leading-relaxed text-sm md:text-base mb-6 flex-grow font-normal">
+                  {item.description}
+                </p>
+
+                {/* Learn More Link */}
+                <Link
+                  href="#"
+                  className="inline-flex items-center text-[#d96126] font-semibold text-sm group-hover:text-[#c2501c] transition-colors"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </Link>
-            </div>
+                  {item.link}
+                  <svg
+                    className="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </Link>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

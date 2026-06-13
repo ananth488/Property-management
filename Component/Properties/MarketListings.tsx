@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CustomSelect from "../CustomSelect";
+import ScrollReveal from "../ScrollReveal";
 
 export default function MarketListings() {
   const [favorites, setFavorites] = useState<number[]>([]);
@@ -102,13 +103,16 @@ export default function MarketListings() {
       <div className="max-w-7xl mx-auto space-y-10">
         
         {/* Header Block: Title & Sort */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6">
+        <ScrollReveal
+          animation="fade-up"
+          className="relative z-30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6"
+        >
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900">
             Market Listings
           </h2>
           {/* Sort selection */}
           <div className="flex items-center gap-2 text-sm text-slate-500 font-medium">
-            <span>Sort by:</span>
+            <span className="whitespace-nowrap">Sort by:</span>
             <CustomSelect
               options={["Newest First", "Price: Low to High", "Price: High to Low"]}
               value={sortBy}
@@ -116,102 +120,108 @@ export default function MarketListings() {
               className="w-48"
             />
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Listings Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {listings.map((item) => {
+          {listings.map((item, index) => {
             const isFav = favorites.includes(item.id);
             return (
-              <div
+              <ScrollReveal
                 key={item.id}
-                className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
+                animation="fade-up"
+                delay={(index % 3) * 150}
+                className="flex"
               >
-                {/* Image panel */}
-                <div className="relative h-60 w-full bg-slate-100 overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {/* Category Tag overlay */}
-                  <span className="absolute top-4 left-4 bg-[#121826]/75 backdrop-blur-sm text-white text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded">
-                    {item.tag}
-                  </span>
-                  
-                  {/* Heart wishlist overlay */}
-                  <button
-                    onClick={() => toggleFavorite(item.id)}
-                    className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-sm text-slate-600 transition-colors focus:outline-none"
-                    aria-label="Add to Wishlist"
-                  >
-                    <svg
-                      className={`w-5 h-5 transition-colors ${
-                        isFav ? "fill-red-500 stroke-red-500" : "stroke-current"
-                      }`}
-                      fill="none"
-                      viewBox="0 0 24 24"
+                <div
+                  className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group w-full"
+                >
+                  {/* Image panel */}
+                  <div className="relative h-60 w-full bg-slate-100 overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    {/* Category Tag overlay */}
+                    <span className="absolute top-4 left-4 bg-[#121826]/75 backdrop-blur-sm text-white text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded">
+                      {item.tag}
+                    </span>
+                    
+                    {/* Heart wishlist overlay */}
+                    <button
+                      onClick={() => toggleFavorite(item.id)}
+                      className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-sm text-slate-600 transition-colors focus:outline-none"
+                      aria-label="Add to Wishlist"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                {/* Card details */}
-                <div className="p-6 flex-grow flex flex-col justify-between space-y-4">
-                  {/* Title & Price */}
-                  <div>
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <h3 className="text-lg font-serif font-bold text-slate-900 group-hover:text-[#d96126] transition-colors leading-tight">
-                        {item.title}
-                      </h3>
-                      <span className="text-lg font-serif font-bold text-slate-900 whitespace-nowrap">
-                        {item.price}
-                      </span>
-                    </div>
-
-                    {/* Location */}
-                    <div className="flex items-center gap-1.5 text-slate-500 text-xs font-normal">
-                      <svg className="w-3.5 h-3.5 text-[#d96126] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <svg
+                        className={`w-5 h-5 transition-colors ${
+                          isFav ? "fill-red-500 stroke-red-500" : "stroke-current"
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                        />
                       </svg>
-                      {item.location}
+                    </button>
+                  </div>
+
+                  {/* Card details */}
+                  <div className="p-6 flex-grow flex flex-col justify-between space-y-4">
+                    {/* Title & Price */}
+                    <div>
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <h3 className="text-lg font-serif font-bold text-slate-900 group-hover:text-[#d96126] transition-colors leading-tight">
+                          {item.title}
+                        </h3>
+                        <span className="text-lg font-serif font-bold text-slate-900 whitespace-nowrap">
+                          {item.price}
+                        </span>
+                      </div>
+
+                      {/* Location */}
+                      <div className="flex items-center gap-1.5 text-slate-500 text-xs font-normal">
+                        <svg className="w-3.5 h-3.5 text-[#d96126] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {item.location}
+                      </div>
+                    </div>
+
+                    {/* Stats list with thin borders */}
+                    <div className={`grid ${item.stats.length === 2 ? 'grid-cols-2' : 'grid-cols-3'} gap-2 border-t border-b border-slate-100/60 py-3 text-center`}>
+                      {item.stats.map((stat, sIndex) => (
+                        <div key={sIndex} className={sIndex > 0 ? "border-l border-slate-100" : ""}>
+                          <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
+                            {stat.label}
+                          </div>
+                          <div className="text-sm font-bold text-slate-800 mt-0.5">
+                            {stat.value}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Action link */}
+                    <div>
+                      <Link
+                        href="#"
+                        className="w-full border border-slate-200 hover:border-slate-800 hover:bg-slate-800 hover:text-white text-slate-800 font-semibold text-center text-sm py-2.5 rounded-lg block transition-all cursor-pointer"
+                      >
+                        View Details &rarr;
+                      </Link>
                     </div>
                   </div>
-
-                  {/* Stats list with thin borders */}
-                  <div className={`grid ${item.stats.length === 2 ? 'grid-cols-2' : 'grid-cols-3'} gap-2 border-t border-b border-slate-100/60 py-3 text-center`}>
-                    {item.stats.map((stat, sIndex) => (
-                      <div key={sIndex} className={sIndex > 0 ? "border-l border-slate-100" : ""}>
-                        <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
-                          {stat.label}
-                        </div>
-                        <div className="text-sm font-bold text-slate-800 mt-0.5">
-                          {stat.value}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Action link */}
-                  <div>
-                    <Link
-                      href="#"
-                      className="w-full border border-slate-200 hover:border-slate-800 hover:bg-slate-800 hover:text-white text-slate-800 font-semibold text-center text-sm py-2.5 rounded-lg block transition-all cursor-pointer"
-                    >
-                      View Details &rarr;
-                    </Link>
-                  </div>
                 </div>
-              </div>
+              </ScrollReveal>
             );
           })}
         </div>

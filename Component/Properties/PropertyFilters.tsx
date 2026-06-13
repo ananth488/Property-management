@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomSelect from "../CustomSelect";
 
 export default function PropertyFilters() {
@@ -8,6 +8,11 @@ export default function PropertyFilters() {
   const [propertyType, setPropertyType] = useState("Residential");
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("No Limit");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleApply = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,17 +20,23 @@ export default function PropertyFilters() {
   };
 
   return (
-    <section className="w-full bg-white pt-16 pb-10 px-6">
+    <section className="relative w-full bg-white pt-16 pb-10 px-6 z-20">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Title */}
-        <h1 className="text-4xl font-serif font-bold text-slate-900 leading-tight">
+        <h1
+          className={`text-4xl font-serif font-bold text-slate-900 leading-tight transition-all duration-1000 ease-out ${
+            isMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           Exclusive Listings
         </h1>
 
         {/* Filters Widget Panel */}
         <form
           onSubmit={handleApply}
-          className="bg-white border border-slate-100 rounded-xl shadow-lg p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 items-end animate-in fade-in duration-300"
+          className={`relative z-30 bg-white border border-slate-100 rounded-xl shadow-lg p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 items-end transition-all duration-1000 delay-200 ease-out ${
+            isMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
         >
           {/* Status Dropdown */}
           <div className="lg:col-span-2 flex flex-col">
